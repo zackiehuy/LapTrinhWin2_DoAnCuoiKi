@@ -15,6 +15,16 @@
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
                     <div class="collapse navbar-collapse " id="navbarNavDropdown">
                         <ul class="navbar-nav">
+                            {{#each subCategory}}
+                                <li class = "nav-item active">
+                                    <a class="nav-link" href="#" aria-hidden="true">/ &nbsp;</a>
+                                    {{#each RowDataPacket}}
+                                    <ul>                                        
+                                        <li><a class="nav-link" href="#">{{namesub}}</a></li>                                        
+                                    </ul>
+                                    {{/each}}                                    
+                                </li>
+                            {{/each}}
                             <li class="nav-item active">
                                 <a class="nav-link" href="#" aria-hidden="true"> / &nbsp; Xã hội <span class="sr-only">(current)</a>                                   
                                 <ul >
@@ -24,53 +34,6 @@
                                     <li ><a class="nav-link" href="#">Chính trị</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" aria-hidden="true" href="#"> / &nbsp; Công nghệ <span class="sr-only">(current)</a>
-                                <ul >
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item active">
-                                <a class="nav-link" aria-hidden="true" href="#"> / &nbsp; Thể thao <span class="sr-only">(current)</a>
-                                <ul >
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" aria-hidden="true" href="#"> / &nbsp; Giải trí <span class="sr-only">(current)</a>
-                                <ul >
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" aria-hidden="true" href="#"> / &nbsp; Sách <span class="sr-only">(current)</a>
-                                <ul >
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" aria-hidden="true" href="#">/ &nbsp; Giáo dục <span class="sr-only">(current)</a>
-                                <ul >
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                </ul>
-                            </li>
-
                         </ul>
                     </div>
                 </nav>
@@ -80,27 +43,14 @@
             <nav class="navbar navbar-expand-lg">
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
-                            <li class="nav-item active">
+                            <li class="nav-item">
                                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Xã hội</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Công nghệ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Thể thao</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Giải trí</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Sách</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Giáo dục</a>
-                            </li>
+                            {{#each lcMaincategory}}
+                                <li class = "nav-item {{#if isActive}}active{{/if}}">
+                                    <a class="nav-link" href="#">{{name}} <span class="sr-only">(current)</span></a>
+                                </li>
+                            {{/each}}
                         </ul>
                     </div>
                 </nav>
