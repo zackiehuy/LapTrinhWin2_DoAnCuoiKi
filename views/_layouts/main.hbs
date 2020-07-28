@@ -13,27 +13,21 @@
         <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-dark p-4 d-flex justify-content-around">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-                    <div class="collapse navbar-collapse " id="navbarNavDropdown">
-                        <ul class="navbar-nav">
+                    <div class="collapse navbar-collapse container" id="navbarNavDropdown">
+                        <ul class="navbar-nav row">
                             {{#each subCategory}}
-                                <li class = "nav-item active">
-                                    <a class="nav-link" href="#" aria-hidden="true">/ &nbsp;</a>
-                                    {{#each RowDataPacket}}
-                                    <ul>                                        
-                                        <li><a class="nav-link" href="#">{{namesub}}</a></li>                                        
-                                    </ul>
-                                    {{/each}}                                    
+                                <li class = "nav-item active col-sm">
+                                    {{#each a}}
+                                    <a class="nav-link" href="#" aria-hidden="true">/ &nbsp; {{name}}</a>
+                                    {{/each}}   
+                                        {{#each b}}
+                                        <ul>                                        
+                                            <li><a class="nav-link" href="#">{{namesub}}</a></li>                                        
+                                        </ul>     
+                                        {{/each}}           
+                                               
                                 </li>
-                            {{/each}}
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#" aria-hidden="true"> / &nbsp; Xã hội <span class="sr-only">(current)</a>                                   
-                                <ul >
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                    <li ><a class="nav-link" href="#">Chính trị</a></li>
-                                </ul>
-                            </li>
+                            {{/each}} 
                         </ul>
                     </div>
                 </nav>

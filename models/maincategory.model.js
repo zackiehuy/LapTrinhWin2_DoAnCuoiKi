@@ -5,7 +5,7 @@ const tbl_maincategory = 'maincategory';
 
 module.exports = {
     all : function(){
-        return db.load(`SELECT idmaincategory,name FROM ${tbl_maincategory}`);
+        return db.load(`SELECT name FROM ${tbl_maincategory}`);
     },
     single : function(id){
         return db.load(`SELECT name FROM ${tbl_maincategory} WHERE idmaincategory = ${id}`);
