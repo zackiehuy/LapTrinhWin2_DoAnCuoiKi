@@ -1,5 +1,4 @@
 const db = require('../utils/db');
-const { count } = require('console');
 
 const tbl_maincategory = 'maincategory';
 
