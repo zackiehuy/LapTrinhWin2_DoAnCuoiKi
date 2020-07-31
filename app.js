@@ -13,6 +13,8 @@ require('./middlewares/session.mdw')(app);
 require('./middlewares/view.mdw')(app);
 //require('./middlewares/locals.mdw')(app);
 
+app.use('/admin', require('./routes/writters.routes'));
+
 app.get('/', function(req,res){
     res.render('home')
 })

@@ -13,5 +13,17 @@ module.exports = {
                 resolve(result);
             });
         });
-    }
+    },
+    add: function (table, entity) {
+        return new Promise(function (resolve, reject) {
+          const sql = `insert into ${table} set ?`;
+          pool.query(sql, entity, function (error, results) {
+            if (error) {
+              return reject(error);
+            }
+    
+            resolve(results);
+          });
+        });
+      }
 }
