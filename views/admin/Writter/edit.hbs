@@ -32,11 +32,11 @@
     <div class="card-body">
       <div class = "form-group">       
         <label for="txtTittle">Tittle</label>
-        <input type = "text" name="tittle" id="txtTittle" class = "form-control">
+        <input type = "text" name="tittle" id="txtTittle" class = "form-control" value = "{{this.news.tittle}}">
       </div>
       <div class = "form-group">   
         <label for="txtAbstract">Abstract</label>
-        <input type = "text" name="abstract" id="txtAbstract" class = "form-control">
+        <input type = "text" name="abstract" id="txtAbstract" class = "form-control" value = "{{this.news.abstract}}">
       </div>
       <div class="form-group">
         <label for="txtContent">Content</label>
@@ -49,7 +49,7 @@
       </div>
       <div class = "form-group">
         <label for="txtCategory">Category</label> 
-        <select name="category" id="txtCategory" class="form-control">
+        <select name="category" id="txtCategory" class="form-control" >
           {{#each listCategory}}
           <option value= "{{idmaincategory}}">{{idmaincategory}}. {{name}}</option>
           {{/each}}
@@ -65,9 +65,13 @@
       </div>
     </div>
     <div class="card-footer">
-      <button type="submit" class="btn btn-lg btn-success btn-block">
+      <button type="submit" class="btn btn-lg btn-success btn-block" formaction="/admin/Writter/update">
         <i class="fa fa-check" aria-hidden="true"></i>
-        ĐĂNG BÀI
+        CẬP NHẬT BÀI VIẾT
+      </button>
+      <button type="submit" class="btn btn-danger btn-sm" formaction="/admin/Writter/del">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Xóa BÀI VIẾT
       </button>
     </div>
   </div>

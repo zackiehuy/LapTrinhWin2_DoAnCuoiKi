@@ -1,18 +1,51 @@
 const express = require('express');
 const multer = require('multer');
 const db = require('../models/writters.model');
-const { listrefuse } = require('../models/writters.model');
 
 const router = express.Router();
 
 
 router.post('/add', async function (req, res) {
-  console.log(req.body.FullDes);
-  res.send('ok');
+  newspaper = {
+    tittle : req.body.tittle,
+    abstract : req.body.abstract,
+    content : req.body.content,
+    category : req.body.category
+  };
+  await db.addnews(newspaper);
+  const id = await db.singletittle(req.body.title);
+  tagnews1 = {
+    idnews : id.idnews, 
+    tag : req.body.tag1
+  }
+  tagnews2 = {
+    idnews : id.idnews, 
+    tag : req.body.tag2
+  }
+  tagnews3 = {
+    idnews : id.idnews, 
+    tag : req.body.tag3
+  }
+  tagnews4 = {
+    idnews : id.idnews, 
+    tag : req.body.tag4
+  }
+  tagnews5 = {
+    idnews : id.idnews, 
+    tag : req.body.tag5
+  }  
+  await db.addnews(tagnews1);
+  await db.addnews(tagnews2);
+  await db.addnews(tagnews3);
+  await db.addnews(tagnews4);
+  await db.addnews(tagnews5);
 })
 
-router.get('/add', function (req, res) {
-  res.render('admin/Writter/add');
+router.get('/add',async function (req, res) {
+  const listCategory = await db.allcategory(); 
+  res.render('admin/Writter/add',{
+    listCategory
+  });
 })
 
 router.post('/add', function (req, res) {
@@ -49,6 +82,49 @@ router.get('/list',async function (req, res) {
         emptywait : listwait.length === 0
   }
   );
+})
+
+router.get('/edit/:idnews',async function (req, res) {
+  const idnews = +req.param.idnews || -1;
+  const row = await db.single(idnews);
+  if(row.length === 0)
+  {
+    return res.send('Invalid parameter.');
+  } 
+  const news = row[0];
+  res.render('admin/Writter/edit',{
+    news
+  });
+})
+
+router.post('/update',async function(req,res){
+  newspaper = {
+    tittle : req.body.tittle,
+    abstract : req.body.abstract,
+    content : req.body.content,
+    category : req.body.category
+  };
+  await db.patch()
+  tagnews1 = {
+    idnews : id.idnews, 
+    tag : req.body.tag1
+  }
+  tagnews2 = {
+    idnews : id.idnews, 
+    tag : req.body.tag2
+  }
+  tagnews3 = {
+    idnews : id.idnews, 
+    tag : req.body.tag3
+  }
+  tagnews4 = {
+    idnews : id.idnews, 
+    tag : req.body.tag4
+  }
+  tagnews5 = {
+    idnews : id.idnews, 
+    tag : req.body.tag5
+  }
 })
 
 module.exports = router;
