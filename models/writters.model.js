@@ -20,6 +20,9 @@ module.exports = {
         return db.load(`SELECT tittle,abstract as ab,content,name FROM newspaper as n join maincategory as mc on 
         n.idmaincategory = mc.idmaincategory WHERE n.idnews = ${id} and (n.status = 4 n.status = 3)`);
     },
+    singletag : function(id){
+        return db.load(`SELECT name,idtag FROM tag WHERE idnews = ${id}`)
+    },
     addnews : function(entity){
         return db.add('newspaper' , entity);
     },

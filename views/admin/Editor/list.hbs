@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Các bài viết đang chờ duyệt</h4>
+  </div>
+  {{#if this.emptylist}}
+  <div class="card-body">
+    <p class="card-text">Không có bài viết chờ được duyệt.</p>
+  </div>
+  {{else}}
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col" class="text-center">#</th>
+        <th scope="col">Tittle</th>
+        <th scope="col">Abstract</th>
+        <th scope="col">Content</th>
+        <th scope="col">Category</th>        
+        <th scope="col">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each this.listwait}}
+      <tr>
+        <th scope="row" class="text-center"></th>
+        <td>{{tittle}}</td>
+        <td>{{ab}}</td>
+        <td>{{content}}</td>
+        <td>{{name}}</td>
+        <td class="text-right">
+          <a class="btn btn-primary btn-sm" href= "/admin/Editor/edit/{{idnews}}" role="button">
+            <i class="fa fa-check" aria-hidden="true"></i>
+          </a>
+          <a class="btn btn-danger btn-sm" href="/admin/Editor/denide" role="button">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </a>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{/if}}
+</div>

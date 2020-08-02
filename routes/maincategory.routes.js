@@ -1,7 +1,5 @@
 const express = require('express');
 const maincategoryModel = require('../models/maincategory.model');
-const express = require('express');
-const { builtinModules } = require('module');
 
 const router = express.Router();
 

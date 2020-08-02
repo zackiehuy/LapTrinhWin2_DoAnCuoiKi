@@ -72,6 +72,7 @@ router.get('/list',async function (req, res) {
   const listaccept = await db.listaccept(1);
   const listrefuse = await db.listrefuse(1);
   const listwait = await db.listwait(1);
+  const tag = await db.singletag(1);
 
   res.render('admin/Writter/list',{
         listaccept,

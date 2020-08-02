@@ -3,13 +3,21 @@ const db = require('../utils/db');
 const tbl_newspaper = 'newspaper';
 
 module.exports = {
-    allmostview : function(){
-        return db.load(`SELECT n.idnews,mc.idmaincategory,n.title,n.date,n.image,mc.name FROM ${tbl_newspaper} as n join maincategory as mc on
-        n.idmaincategory = mc.idmaincategory WHERE status = 2 ODER BY views DESC LIMIT 10`);
+    allmostview : function(id){
+        return db.load(`SELECT n.idnews as idnews,mc.idmaincategory as idmain ,n.tittle as tittle,n.date as date
+        ,n.image as image,mc.name as name FROM ${tbl_newspaper} as n join maincategory as mc on
+        n.idmaincategory = mc.idmaincategory WHERE status = 2 ORDER BY n.views DESC LIMIT ${id},5`);
     },
-    allnews : function(){
-        return db.load(`SELECT n.idnews,mc.idmaincategory,n.title,n.date,n.image,mc.name FROM ${tbl_newspaper} as n join maincategory as mc on
-        n.idmaincategory = mc.idmaincategory WHERE status = 2 ODER BY date DESC LIMIT 10`);
+    allnews : function(id){
+        return db.load(`SELECT n.idnews as idnews,mc.idmaincategory as idmain ,n.tittle as tittle,n.date as date
+        ,n.image as image,mc.name as name FROM ${tbl_newspaper} as n join maincategory as mc on
+        n.idmaincategory = mc.idmaincategory WHERE status = 2 ORDER BY n.date DESC LIMIT ${id},5`);
+    },
+    hotnews : function(){
+        return db.load(`SELECT n.idnews as idnews,mc.idmaincategory as idmain ,n.tittle as tittle,n.date as date
+        ,n.image as image,mc.name as name FROM ${tbl_newspaper} as n join maincategory as mc on 
+        n.idmaincategory = mc.idmaincategory WHERE DATEDIFF(date,DATE_SUB(CURDATE(),INTERVAL '7' DAY)) < 7 
+        AND n.status = 2 ORDER BY n.views DESC LIMIT 0,4`)
     },
     singlecategory: function(id){
         return db.load(`SELECT title,date,image,nc.name FROM ${tbl_newspaper} as n join newssubcategory as nc on
