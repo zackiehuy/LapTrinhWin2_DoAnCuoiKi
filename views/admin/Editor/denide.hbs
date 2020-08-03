@@ -1,0 +1,45 @@
+<nav class="navbar navbar-light bg-light border-bottom border-light">
+    <nav class="navbar navbar-expand-lg">
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+           </ul>
+        </div>
+    </nav>
+</nav>
+<a href="./list">
+    <button class="btn btn-lg btn-success btn-block" >
+                    <i class="fa fa-backward" aria-hidden="true"></i>
+                    QUAY VỀ DANH SÁCH BÀI VIẾT
+    </button>
+</a>
+<form method = "POST" class = "was-validated">
+    <div class="card">
+        <div class="card-header">
+        WYSIWYG HTML Editor
+        </div>
+        <div class = "card-body">
+            <div class = "form-group">
+                <label for="txtidnews"><i class="fa fa-tags" aria-hidden="true"></i>Mã bài viết</label>
+                <input type = "text" name = "idnews" id = "txtidnews" value = "" readonly>
+            </div>
+            <div class = "form-group">
+                <div class="mb-3">
+                    <label for="txtReason"><i class="fa fa-tags" aria-hidden="true"></i>Lý do từ chối</label>
+                    <textarea class="form-control is-invalid" id="txtReason" required></textarea>
+                    <div class="invalid-feedback">
+                        Please enter a message in the textarea.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-lg btn-danger btn-block" formaction="/admin/Editor/list">
+                <i class="fa fa-window-close" aria-hidden="true"></i>
+                TỪ CHỐI BÀI VIẾT
+            </button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,53 @@
+<form method = "POST">
+    <div class="card">
+        <div class="card-header">
+        WYSIWYG HTML Editor
+        </div>
+        <div class = "card-body">
+            <div class = "form-group">
+                <label for="txtMaincategory"><i class="fa fa-tags" aria-hidden="true"></i> Main Category</label>
+                <select class="form-control" id="txtMaincategory" name = "Maincategory">
+                    {{#each row}}
+                    <option value = "{{idmaincategory}}" selected>{{idmaincategory}}. &nbsp; {{name}}</option>
+                    {{/each}}
+                    {{#each maincategory}}
+                    <option value = "{{idmaincategory}}">{{idmaincategory}}. &nbsp;{{name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class = "form-group">
+                <label for="Subcategory"> <i class="fa fa-tags" aria-hidden="true"></i> Sub Category</label>  
+                <br>              
+                <div class="form-check form-check-inline">
+                    <div class = " container">
+                        <div class ="row">
+                            {{#each subcategory}}
+                            <div class = "col-sm-3">
+                                <input class="form-check-input" type="checkbox" id="txtSubcategory" name ="Subcategory" 
+                                value="{{idsubcategory}}">
+                                <label class="form-check-label" for="Subcategory">{{names}}</label>                             
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "form-group">
+                <label for=""> <i class="fa fa-tags" aria-hidden="true"></i> Tag</label> 
+            {{#if tagempty}}
+                <div>Không có dữ liệu tag</div>
+            {{else}} 
+                {{#each tag}}
+                <input type = "text" name = "{{idtag}}" value = "{{name}}">
+                {{/each}}
+            {{/if}}
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-lg btn-success btn-block" formaction="/admin/Writter/update">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                CẬP NHẬT BÀI VIẾT
+            </button>
+        </div>
+    </div>
+</form>
