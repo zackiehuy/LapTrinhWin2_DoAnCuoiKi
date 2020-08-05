@@ -1,9 +1,16 @@
 const express = require('express');
+const exphbs = require('express-handlebars');
 const model_administrator = require('../models/administrator.models');
+
 
 const router = express.Router();
 
-router.get('/Category/list', async function(req,res){
+
+router.get('/home',function(req,res){
+    res.render('admin/Administrator/home');
+})
+
+router.get('/category/list', async function(req,res){
     const maincategory = await model_administrator.allmaincategory();
     const subcategory = await model_administrator.allsubcategory();
     res.render('admin/Administrator/Category/list',{

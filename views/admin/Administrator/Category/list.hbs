@@ -1,3 +1,27 @@
+<nav class="navbar navbar-light bg-light border-bottom border-light">
+    <nav class="navbar navbar-expand-lg">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+           <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/Administrator/home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class = "nav-item ">
+                    <a class="nav-link active" href="/admin/Administrator/category/list">Category <span class="sr-only"></span></a>
+                </li>
+                <li class = "nav-item ">
+                    <a class="nav-link" href="/admin/Administrator/news/list">Newspaper <span class="sr-only"></span></a>
+                </li>
+                <li class = "nav-item ">
+                    <a class="nav-link" href="/admin/Administrator/tag/list">Tag <span class="sr-only"></span></a>
+                </li>
+                <li class = "nav-item ">
+                    <a class="nav-link" href="/admin/Administrator/user/list">User <span class="sr-only"></span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</nav>
+<br>
 <div class="card">
   <div class="card-header">
     <h4><i class="fa fa-tags" aria-hidden="true"></i> Main Category</h4>
@@ -13,7 +37,7 @@
         <th scope="col" class="text-center">#</th>
         <th scope="col">Name</th>      
         <th scope="col" class = "text-right">
-            <a class="btn btn-success btn-sm" href= "/admin/Administrator/detail/add" role="button">
+            <a class="btn btn-success btn-sm" href= "/admin/Administrator/Category/detail/addmain" role="button">
                 <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Add 
             </a>
         </th>
@@ -25,7 +49,7 @@
         <th scope="row" class="text-center">{{idmaincategory}}</th>
         <td>{{name}}</td>
         <td class="text-right">
-          <a class="btn btn-primary btn-sm" href= "/admin/Administrator/detail/add" role="button">
+          <a class="btn btn-primary btn-sm" href= "/admin/Administrator/Category/detailmain/{{idmaincategory}}" role="button">
             <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; Detail
           </a>         
         </td>
@@ -52,7 +76,7 @@
         <th scope="col" class="text-center">#</th>
         <th scope="col">Name</th>      
         <th scope="col" class="text-right">
-            <a class="btn btn-success btn-sm" href= "/admin/Administrator/detail/{{idmaincategory}}" role="button">
+            <a class="btn btn-success btn-sm" href= "/admin/Administrator/Category/addsub" role="button">
                 <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Add 
             </a>
         </th>
@@ -64,8 +88,9 @@
         <th scope="row" class="text-center">{{idsubcategory}}</th>
         <td>{{name}}</td>
         <td class="text-right">
-          <a class="btn btn-primary btn-sm" href= "/admin/Administrator/detail/{{idsubcategory}}" role="button">
-            <i class="fas fa-edit    "></i> &nbsp; Detail
+          <a class="btn btn-primary btn-sm" href= "/admin/Administrator/Category/detailsub/{{idsubcategory}}" 
+          role="button">
+             <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; Detail
           </a>         
         </td>
       </tr>
