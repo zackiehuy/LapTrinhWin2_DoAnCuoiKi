@@ -25,7 +25,7 @@ passport.use('local-login',new LocalStrategy(
             passReqToCallback : true
         },
         function(req, username, password, done) { // callback with email and password from our form
-            connection.query("SELECT username,password,ida FROM account WHERE username = ?",[username], function(err, rows){
+            connection.query("SELECT username,password,ida,idaccountcategory FROM account WHERE username = ?",[username], function(err, rows){
                 if (err)
                     return done(err);
                 if (!rows.length) {

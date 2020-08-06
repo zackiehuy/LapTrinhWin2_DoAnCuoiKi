@@ -22,7 +22,8 @@ router.post('/login',passport.authenticate('local-login', {
     } else {
       req.session.cookie.expires = false;
     }
-    res.redirect('/');}
+    res.redirect('/');
+  }
 );
 
 module.exports = router;
