@@ -8,6 +8,7 @@ const app = express();
 app.use(express.urlencoded({
     entended : true
 }));
+
 app.use('/public', express.static('public'));
 app.use(flash());
 app.use(cookieParser());
@@ -18,15 +19,21 @@ require('./middlewares/passport.mdw')(app);
 //require('./middlewares/locals.mdw')(app);
 //
 
+
+
+
 app.use('/admin/writter', require('./routes/writters.routes'));
 app.use('', require('./routes/newspaper.routes'));
 app.use('/admin/editor',require('./routes/editor.routes'));
 app.use('/admin/Administrator',require('./routes/administrator.routes'));
 app.use('/account',require('./routes/account.routes'));
 
+
 app.get('/', function(req,res){
-    res.render('home')
+  res.render('home')
 })
+
+
 
 
 

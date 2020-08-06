@@ -1,20 +1,20 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bodyParser = require('body-parser');
-var bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt-nodejs');
 const mysql = require('mysql');
 const dbconfig = require('../config/default.json');
-var connection = mysql.createConnection(dbconfig.news);
-connection.connect();
+const connection = mysql.createConnection(dbconfig.news);
+//connection.connect();
 connection.query('USE news');
 
 passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    done(null, user.ida);
   });
   
-passport.deserializeUser(function(id, done) {
-    connection.query("SELECT username,password FROM ida = ? ",[id], function(err, rows){
-        done(err, rows[0]);
+passport.deserializeUser(function(ida, done) {
+    connection.query("SELECT username,password,ida,idaccountcategory FROM account WHERE ida = "+ida, function(err, rows){
+        return done(err, rows[0]);
     });
 });
 

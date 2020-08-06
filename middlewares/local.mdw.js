@@ -27,6 +27,8 @@ module.exports = function(app){
             }
             res.locals.lcMaincategory = data;
         }
+        res.locals.emptyaccountcategory = true;
+        res.locals.emptyusername = true; 
         next();
     }),
     app.use(async function(req,res,next){

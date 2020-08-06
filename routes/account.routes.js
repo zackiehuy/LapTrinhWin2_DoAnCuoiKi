@@ -10,7 +10,7 @@ router.get('/login',function(req,res){
 })
 
 router.post('/login',passport.authenticate('local-login', {
-        successRedirect : 'home', // redirect to the secure profile section
+        successRedirect : 'isLogin', // redirect to the secure profile section
         failureRedirect : 'login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }),
@@ -25,5 +25,48 @@ router.post('/login',passport.authenticate('local-login', {
     res.redirect('/');
   }
 );
+
+router.get('/isLogin',function(req,res,next){
+    if(req.isAuthenticated())
+        return next();
+    res.redirect('home'); 
+    },function(req,res){
+      
+        const accountcategory = req.user.idaccountcategory;
+        const username = req.user.username;
+        const falseaccountcategory = accountcategory === 1;
+        res.locals.username = username;
+        res.locals.falseaccountcategory = falseaccountcategory;
+        res.locals.emptyaccountcategory = false;
+        res.locals.emptyusername = false;
+        if((accountcategory === 1))
+        {
+            res.render('home',{
+              account : req.user             
+            });
+            res.redirect('/');
+        }
+        else if((accountcategory === 2))
+        {
+            res.render('admin/Writter/list',{
+              account : req.user             
+            });
+            res.redirect('admin/Writter/list');
+        }
+        else if((accountcategory === 3))
+        {
+            res.render('admin/Editor/list',{
+              account : req.user             
+            });
+            res.redirect('/admin/Editor/list');
+        }
+        else if((accountcategory === 4))
+        {
+            res.render('admin/Administrator/home',{
+              account : req.user             
+            });
+            res.redirect('admin/Administrator/list');
+        }
+});
 
 module.exports = router;

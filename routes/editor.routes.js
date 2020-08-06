@@ -4,9 +4,11 @@ const router = express.Router();
 
 router.get('/list', async function(req,res ){
     const list = await model_editor.all(1);
+    
     res.render('admin/Editor/list',{
         list,
-        emptylist : list.length === 0
+        emptylist : list.length === 0,
+        username : req.user.username
     });
 });
 

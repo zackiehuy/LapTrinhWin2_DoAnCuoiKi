@@ -6,12 +6,12 @@ module.exports = {
     allmostview : function(id){
         return db.load(`SELECT n.idnews as idnews,mc.idmaincategory as idmain ,n.tittle as tittle,n.date as date
         ,n.image as image,mc.name as name FROM ${tbl_newspaper} as n join maincategory as mc on
-        n.idmaincategory = mc.idmaincategory WHERE status = 2 ORDER BY n.views DESC LIMIT ${id},5`);
+        n.idmaincategory = mc.idmaincategory WHERE n.status = 2 ORDER BY n.views DESC LIMIT ${id},5`);
     },
     allnews : function(id){
         return db.load(`SELECT n.idnews as idnews,mc.idmaincategory as idmain ,n.tittle as tittle,n.date as date
         ,n.image as image,mc.name as name FROM ${tbl_newspaper} as n join maincategory as mc on
-        n.idmaincategory = mc.idmaincategory WHERE status = 2 ORDER BY n.date DESC LIMIT ${id},5`);
+        n.idmaincategory = mc.idmaincategory WHERE n.status = 2 ORDER BY n.date DESC LIMIT ${id},5`);
     },
     hotnews : function(){
         return db.load(`SELECT n.idnews as idnews,mc.idmaincategory as idmain ,n.tittle as tittle,n.date as date
@@ -21,20 +21,20 @@ module.exports = {
     },
     singlecategory: function(id){
         return db.load(`SELECT title,date,image,nc.name FROM ${tbl_newspaper} as n join newssubcategory as nc on
-        idmaincategory WHERE idsubcategory = ${id} AND WHERE status = 2`);
+        idmaincategory WHERE idsubcategory = ${id} AND WHERE n.status = 2`);
     },
     allmaincategory: function(id){
         return db.load(`SELECT title,date,image,name,date,abstract FROM ${tbl_newspaper} join maincategory on
-        idmaincategory WHERE idmaincategory = ${id} AND WHERE status = 2`);
+        idmaincategory WHERE idmaincategory = ${id} AND WHERE n.status = 2`);
     },
     allsubcategory: function(id){
         return db.load(`SELECT n.title,n.date,n.image,sc.name,n.date,n.abstract FROM (${tbl_newspaper} as n join 
             newssubcategory as ns on n.idnews = ns.idnews)join subcategory as sc on sc.idsubcategory =
-             ns.idsubcategory WHERE ns.idsubcategory = ${id} WHERE status = 2`);
+             ns.idsubcategory WHERE ns.idsubcategory = ${id} WHERE n.status = 2`);
     },
     alltag: function(id){
         return db.load(`SELECT n.title,n.date,n.image,sc.name,n.date,n.abstract FROM (${tbl_newspaper} as n join 
             newssubcategory as ns on n.idnews = ns.idnews)join subcategory as sc on sc.idsubcategory =
-             ns.idsubcategory WHERE ns.idsubcategory = ${id} WHERE status = 2`);
+             ns.idsubcategory WHERE ns.idsubcategory = ${id} WHERE n.status = 2`);
     }
 }
