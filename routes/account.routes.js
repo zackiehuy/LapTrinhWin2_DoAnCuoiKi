@@ -42,9 +42,6 @@ router.get('/isLogin',function(req,res,next){
         const falseaccountcategory = accountcategory === 1;
         //req.setHeader(res.locals.emptyusername,false);
         //req.setHeader(res.locals.emptyaccountcategory,false);
-        res.render('_layouts/admin',{
-          username
-        });
         console.log(username);
         res.locals.username = username;
         if((accountcategory === 1))
