@@ -4,10 +4,15 @@ const passport = require('passport');
 
 const router = express.Router();
 
+router.all('/*',function(req,res,next){
+  res.app.locals.layout = 'admin';
+  next();
+});
+
 router.get('/login',function(req,res){
     res.render('Account/login',{layout : false,
         message: req.flash('loginMessage')});
-})
+});
 
 router.post('/login',passport.authenticate('local-login', {
         successRedirect : 'isLogin', // redirect to the secure profile section
@@ -30,15 +35,18 @@ router.get('/isLogin',function(req,res,next){
     if(req.isAuthenticated())
         return next();
     res.redirect('home'); 
-    },function(req,res){
+    },function(req,res,next){
       
         const accountcategory = req.user.idaccountcategory;
         const username = req.user.username;
         const falseaccountcategory = accountcategory === 1;
+        //req.setHeader(res.locals.emptyusername,false);
+        //req.setHeader(res.locals.emptyaccountcategory,false);
+        res.render('_layouts/admin',{
+          username
+        });
+        console.log(username);
         res.locals.username = username;
-        res.locals.falseaccountcategory = falseaccountcategory;
-        res.locals.emptyaccountcategory = false;
-        res.locals.emptyusername = false;
         if((accountcategory === 1))
         {
             res.render('home',{
@@ -65,8 +73,9 @@ router.get('/isLogin',function(req,res,next){
             res.render('admin/Administrator/home',{
               account : req.user             
             });
-            res.redirect('admin/Administrator/list');
+            res.redirect('/admin/Administrator/home');
         }
+        
 });
 
 module.exports = router;

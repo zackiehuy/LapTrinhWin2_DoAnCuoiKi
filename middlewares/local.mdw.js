@@ -4,6 +4,7 @@ const subcategoryModel = require('../models/subcategory.model');
 
 const global_maincategory = 'globalmaincategory';
 const global_subcategory = 'globalsubcategory';
+const global_empty = 'globalempty';
 
 const cache = new LRU({
     max:500,
@@ -11,7 +12,10 @@ const cache = new LRU({
 })
 
 
+
 module.exports = function(app){
+
+
     app.use(async function(req,res,next){
         const data=cache.get(global_maincategory);
         if(!data){
@@ -19,6 +23,7 @@ module.exports = function(app){
             const rows = await maincategoryModel.all();
             res.locals.lcMaincategory = rows;           
             cache.set(global_maincategory,rows);
+            
         }
         else{
             console.log('++ cache hit for `global_maincategory');
@@ -27,8 +32,7 @@ module.exports = function(app){
             }
             res.locals.lcMaincategory = data;
         }
-        res.locals.emptyaccountcategory = true;
-        res.locals.emptyusername = true; 
+        
         next();
     }),
     app.use(async function(req,res,next){

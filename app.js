@@ -21,7 +21,6 @@ require('./middlewares/passport.mdw')(app);
 
 
 
-
 app.use('/admin/writter', require('./routes/writters.routes'));
 app.use('', require('./routes/newspaper.routes'));
 app.use('/admin/editor',require('./routes/editor.routes'));
@@ -30,6 +29,7 @@ app.use('/account',require('./routes/account.routes'));
 
 
 app.get('/', function(req,res){
+
   res.render('home')
 })
 
