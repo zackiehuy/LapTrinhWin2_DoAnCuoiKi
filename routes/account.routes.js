@@ -1,13 +1,8 @@
 const express = require('express');
 const tbl_account = require('../models/account.models');
 const passport = require('passport');
-
 const router = express.Router();
 
-router.all('/*',function(req,res,next){
-  res.app.locals.layout = 'admin';
-  next();
-});
 
 router.get('/login',function(req,res){
     res.render('Account/login',{layout : false,
@@ -35,20 +30,27 @@ router.get('/isLogin',function(req,res,next){
     if(req.isAuthenticated())
         return next();
     res.redirect('home'); 
-    },function(req,res,next){
+    },function(req,res){
       
         const accountcategory = req.user.idaccountcategory;
         const username = req.user.username;
         const falseaccountcategory = accountcategory === 1;
         //req.setHeader(res.locals.emptyusername,false);
         //req.setHeader(res.locals.emptyaccountcategory,false);
-        console.log(username);
-        res.locals.username = username;
+
+        //res.setHeader(res.locals.username , username);
+        if(username != null)
+        {
+          res.render('home',{
+            usernamea : username
+        });
+        return;
+        }
         if((accountcategory === 1))
         {
-            res.render('home',{
-              account : req.user             
-            });
+            //res.render('home',{
+            //  account : req.user             
+           // });
             res.redirect('/');
         }
         else if((accountcategory === 2))
@@ -74,5 +76,8 @@ router.get('/isLogin',function(req,res,next){
         }
         
 });
+router.use(function(req,res){
+  res.locals.username
+})
 
 module.exports = router;

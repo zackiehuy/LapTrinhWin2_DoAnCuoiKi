@@ -2,7 +2,6 @@ const express = require('express');
 require('express-async-error');
 const flash    = require('connect-flash');
 const cookieParser = require('cookie-parser');
-
 const app = express();
 
 app.use(express.urlencoded({
@@ -12,29 +11,26 @@ app.use(express.urlencoded({
 app.use('/public', express.static('public'));
 app.use(flash());
 app.use(cookieParser());
+require('./middlewares/view.mdw')(app);
 require('./middlewares/local.mdw')(app);
 require('./middlewares/session.mdw')(app);
-require('./middlewares/view.mdw')(app);
 require('./middlewares/passport.mdw')(app);
 //require('./middlewares/locals.mdw')(app);
 //
 
 
-
+app.use('/account',require('./routes/account.routes'));
 app.use('/admin/writter', require('./routes/writters.routes'));
 app.use('', require('./routes/newspaper.routes'));
 app.use('/admin/editor',require('./routes/editor.routes'));
 app.use('/admin/Administrator',require('./routes/administrator.routes'));
-app.use('/account',require('./routes/account.routes'));
 
 
 app.get('/', function(req,res){
-
+  console.log(req.user.username);
+  res.locals.username = req.user.username;
   res.render('home')
 })
-
-
-
 
 
 app.use(function (req, res) {
