@@ -29,12 +29,42 @@ router.post('/login',passport.authenticate('local-login', {
     }
 );
 
-router.get('/isLogin',function(req,res,next){
+router.get('/register', function(req, res) {
+  // render the page and pass in any flash data if it exists
+  res.render('Account/register', { message: req.flash('signupMessage') });
+});
+
+// process the signup form
+router.post('/register', passport.authenticate('local-register', {
+  successRedirect : 'profile', // redirect to the secure profile section
+  failureRedirect : 'register', // redirect back to the signup page if there is an error
+  failureFlash : true // allow flash messages
+}));
+
+router.get('/profile', function(req,res,next){
   res.app.locals.username = req.user.username;
-  res.app.locals.empty = false;
     if(req.isAuthenticated())
         return next();
-    res.redirect('home'); 
+    res.redirect('/'); 
+    }, function(req, res) {
+  res.render('Account/profile', {
+    user : req.user // get the user out of session and pass to template
+  });
+});
+
+// =====================================
+// LOGOUT ==============================
+// =====================================
+router.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+router.get('/isLogin',function(req,res,next){
+  res.app.locals.username = req.user.username;
+    if(req.isAuthenticated())
+        return next();
+    res.redirect('/'); 
     },function(req,res){
       
         const accountcategory = req.user.idaccountcategory;

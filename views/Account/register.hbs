@@ -1,0 +1,129 @@
+
+{{#section 'css'}}
+<style>
+    body{
+        margin: 0;
+        font-size: .9rem;
+        font-weight: 400;
+        line-height: 1.6;
+        color: #212529;
+        text-align: left;
+        background-color: #f5f8fa;
+    }
+    .my-form
+        {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .my-form .row
+        {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .login-form
+        {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .login-form .row
+        {
+            margin-left: 0;
+            margin-right: 0;
+        }
+</style>
+{{/section}}
+
+<main class="my-form">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Register</div>
+                    <div class="card-body">
+                        <form name="my-form" onsubmit="return validform()" action="register" method="POST">
+                            <div class="form-group row">
+                                <label for="Txtusername" class="col-md-4 col-form-label text-md-right">Username</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="Txtusername" class="form-control" name="username">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="Txtpassword" class="col-md-4 col-form-label text-md-right">Password</label>
+                                <div class="col-md-6">
+                                    <input type="password" id="Txtpassword" class="form-control" name="password">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="Txthoten" class="col-md-4 col-form-label text-md-right">FullName</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="Txthoten" class="form-control" name="hoten">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="Txtemail" class="col-md-4 col-form-label text-md-right">Email</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="Txtemail" class="form-control" name = "email">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="TextDOB" class="col-md-4 col-form-label text-md-right">Date of Birth</label>
+                                <div class="col-md-6">
+                                    <input type="date" id="TextDOB" class="form-control" name = "DOB">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary" >
+                                    Register
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#section 'js'}}
+    <script>
+        function validform() {
+
+            var a = document.forms["my-form"]["full-name"].value;
+            var b = document.forms["my-form"]["email-address"].value;
+            var c = document.forms["my-form"]["username"].value;
+            var d = document.forms["my-form"]["permanent-address"].value;
+            var e = document.forms["my-form"]["nid-number"].value;
+
+            if (a==null || a=="")
+            {
+                alert("Please Enter Your Full Name");
+                return false;
+            }else if (b==null || b=="")
+            {
+                alert("Please Enter Your Email Address");
+                return false;
+            }else if (c==null || c=="")
+            {
+                alert("Please Enter Your Username");
+                return false;
+            }else if (d==null || d=="")
+            {
+                alert("Please Enter Your Permanent Address");
+                return false;
+            }else if (e==null || e=="")
+            {
+                alert("Please Enter Your NID Number");
+                return false;
+            }
+
+        }
+    </script>
+{{/section}}

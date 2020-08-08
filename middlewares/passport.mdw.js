@@ -19,7 +19,7 @@ module.exports = function(app){
         secret : 'keyboard cat',
         resave: true,
         saveUninitialized: true,
-        expires: 60 * 60 * 1000 
+        MaxAge: 60 * 60 * 1000 
     }));
     app.use(passport.initialize());
     app.use(passport.session());
@@ -36,6 +36,46 @@ passport.deserializeUser(function(ida, done) {
         return done(err, rows[0]);
     });
 });
+
+passport.use('local-register',new LocalStrategy(
+    {
+        usernameField : 'username',
+        passwordField : 'password',
+        passReqToCallback : true
+    },
+    function(req,username,password,hoten,email,DOB,done){
+        connection.query("SELECT * FROM account WHERE username = ?",[username], function(err, rows) {
+            if (err)
+                return done(err);
+            if (rows.length) {
+                return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
+            } else {
+                // if there is no user with that username
+                // create the user
+                const newUserMysql = {
+                    username: username,
+                    password: bcrypt.hashSync(password, null, null),
+                    idaccountcategory : 1,
+                    hoten :hoten,
+                    email : email,
+                    DOB : DOB,
+                };
+                const newUser = {
+                    username: username,
+                    password: bcrypt.hashSync(password, null, null),
+                };
+
+                const insertQuery = "INSERT INTO account ( username, password , idaccountcategory, hoten,email,DOB ) values (?,?,?)";
+                connection.query(insertQuery,[newUserMysql.username, newUserMysql.password,newUserMysql.idaccountcategory
+                    ,newUserMysql.hoten,newUserMysql.email,newUserMysql.DOB],function(err, rows) {
+                    newUser.ida = rows;
+
+                    return done(null, newUser);
+                });
+            }
+        });
+    }
+));
 
 passport.use('local-login',new LocalStrategy(
         {
@@ -63,3 +103,4 @@ passport.use('local-login',new LocalStrategy(
         }
         )
 );
+

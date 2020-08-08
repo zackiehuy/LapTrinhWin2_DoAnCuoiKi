@@ -1,0 +1,86 @@
+
+{{#section 'css'}}
+<style>
+    body{
+        margin: 0;
+        font-size: .9rem;
+        font-weight: 400;
+        line-height: 1.6;
+        color: #212529;
+        text-align: left;
+        background-color: #f5f8fa;
+    }
+    .my-form
+        {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .my-form .row
+        {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .login-form
+        {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .login-form .row
+        {
+            margin-left: 0;
+            margin-right: 0;
+        }
+</style>
+{{/section}}
+
+<main class="my-form">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Register</div>
+                    <div class="card-body">
+                        <form name="my-form" onsubmit="return validform()" action="success.php" method="">
+                            <div class="form-group row">
+                                <label for="Txtusername" class="col-md-4 col-form-label text-md-right" readonly>Username</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="Txtusername" class="form-control" name="username" value = "{{user.username}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="Txthoten" class="col-md-4 col-form-label text-md-right">FullName</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="Txthoten" class="form-control" name="hoten" value = "{{user.hoten}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="Txtemail" class="col-md-4 col-form-label text-md-right">Email</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="Txtemail" class="form-control" name = "email" value = "{{user.email}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="TextDOB" class="col-md-4 col-form-label text-md-right">Date of Birth</label>
+                                <div class="col-md-6">
+                                    <input type="date" id="TextDOB" class="form-control" name = "DOB" value = "{{user.DOB}}">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Update
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
