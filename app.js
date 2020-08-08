@@ -13,10 +13,10 @@ app.use(flash());
 app.use(cookieParser());
 require('./middlewares/view.mdw')(app);
 require('./middlewares/local.mdw')(app);
-require('./middlewares/session.mdw')(app);
+//require('./middlewares/session.mdw')(app);
 require('./middlewares/passport.mdw')(app);
-//require('./middlewares/locals.mdw')(app);
-//
+//require('./middlewares/auth.mdw')(app);
+
 
 
 app.use('/account',require('./routes/account.routes'));
@@ -24,11 +24,11 @@ app.use('/admin/writter', require('./routes/writters.routes'));
 app.use('', require('./routes/newspaper.routes'));
 app.use('/admin/editor',require('./routes/editor.routes'));
 app.use('/admin/Administrator',require('./routes/administrator.routes'));
-
+app.use(function(req,res){
+  req.app.locals.empty = true;
+})
 
 app.get('/', function(req,res){
-  console.log(req.user.username);
-  res.locals.username = req.user.username;
   res.render('home')
 })
 

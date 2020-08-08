@@ -3,6 +3,10 @@ const tbl_account = require('../models/account.models');
 const passport = require('passport');
 const router = express.Router();
 
+/*router.all('/*', function (req, res, next) {
+  req.app.locals.layout = 'subcriber'; // set your layout here
+  next(); // pass control to the next handler
+});*/
 
 router.get('/login',function(req,res){
     res.render('Account/login',{layout : false,
@@ -10,23 +14,24 @@ router.get('/login',function(req,res){
 });
 
 router.post('/login',passport.authenticate('local-login', {
-        successRedirect : 'isLogin', // redirect to the secure profile section
+        successReturnToOrRedirect : 'isLogin', // redirect to the secure profile section
         failureRedirect : 'login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
-    }),
-    function(req, res) {
-     console.log("hello");
-
-    if (req.body.remember) {
-      req.session.cookie.maxAge = 1000 * 60 * 3;
+    }),function(req,res){
+      if (req.body.remember) {
+        console.log('remember')
+        req.session.cookie.maxAge = 2 * 60 * 1000; // Cookie expires after 30 days
     } else {
-      req.session.cookie.expires = false;
+        console.log('no remember')
+        req.session.cookie.expires = false; // Cookie expires at end of session
     }
-    res.redirect('/');
-  }
+      res.redirect('/');
+    }
 );
 
 router.get('/isLogin',function(req,res,next){
+  res.app.locals.username = req.user.username;
+  res.app.locals.empty = false;
     if(req.isAuthenticated())
         return next();
     res.redirect('home'); 
@@ -39,13 +44,7 @@ router.get('/isLogin',function(req,res,next){
         //req.setHeader(res.locals.emptyaccountcategory,false);
 
         //res.setHeader(res.locals.username , username);
-        if(username != null)
-        {
-          res.render('home',{
-            usernamea : username
-        });
-        return;
-        }
+        
         if((accountcategory === 1))
         {
             //res.render('home',{
@@ -69,15 +68,12 @@ router.get('/isLogin',function(req,res,next){
         }
         else if((accountcategory === 4))
         {
-            res.render('admin/Administrator/home',{
-              account : req.user             
-            });
-            res.redirect('/admin/Administrator/home');
+            //res.render('admin/Administrator/home',{
+             // account : req.user             
+            //});
+             res.redirect('/admin/Administrator/home');
         }
         
 });
-router.use(function(req,res){
-  res.locals.username
-})
 
 module.exports = router;

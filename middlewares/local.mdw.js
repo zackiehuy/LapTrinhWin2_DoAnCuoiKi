@@ -14,10 +14,6 @@ const cache = new LRU({
 
 
 module.exports = function(app){
-    app.get('/d',function(req,res,next){
-        res.locals.username = req.username;
-        next()
-    })
     app.use(async function(req,res,next){
         const data=cache.get(global_maincategory);
         if(!data){

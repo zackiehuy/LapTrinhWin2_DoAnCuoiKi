@@ -34,7 +34,6 @@
                 </div>
             </div>
             <nav class="navbar navbar-light bg-light border-bottom border-light">
-                {{#if this.emptyaccountcategory}}
                     <nav class="navbar navbar-expand-lg">
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav">
@@ -49,24 +48,6 @@
                             </ul>
                         </div>
                     </nav>
-                {{else}}
-                    {{#if falseaccountcategory}}
-                        <nav class="navbar navbar-expand-lg">
-                            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                                <ul class="navbar-nav">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                                    </li>
-                                    {{#each lcMaincategory}}
-                                        <li class = "nav-item {{#if isActive}}active{{/if}}">
-                                            <a class="nav-link" href="#">{{name}} <span class="sr-only">(current)</span></a>
-                                        </li>
-                                    {{/each}}
-                                </ul>
-                            </div>
-                        </nav>
-                    {{/if}}
-                {{/if}}
                 <div>
                     <form class="form-inline" >
                         <button   class="navbar-toggler mr-sm-3" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,26 +57,26 @@
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form> 
                 </div>
-                {{#if emptyusername}}
-                    <div class="dropdown">
+                {{#if empty}}
+                <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="/account/login">Đăng nhập</a>
-                            <a class="dropdown-item" href="#">Đăng kí</a>
+                            <a class="dropdown-item" href="/account/login">Log in</a>
+                            <a class="dropdown-item" href="#">Register</a>
                         </div>
-                    </div>
+                </div>
                 {{else}}
-                    <div class="dropdown">
+                <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Xin chào {{this.username}}
+                            {{this.username}}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="/account/login">Profile</a>
-                            <a class="dropdown-item" href="#">Đăng xuất</a>
+                            <a class="dropdown-item" href="#">Logout</a>
                         </div>
-                    </div>
+                </div>    
                 {{/if}}
             </nav>
         </div>
