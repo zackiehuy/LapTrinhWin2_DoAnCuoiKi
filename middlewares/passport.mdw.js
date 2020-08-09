@@ -43,7 +43,7 @@ passport.use('local-register',new LocalStrategy(
         passwordField : 'password',
         passReqToCallback : true
     },
-    function(req,username,password,hoten,email,DOB,done){
+    function(req,username,password,done){
         connection.query("SELECT * FROM account WHERE username = ?",[username], function(err, rows) {
             if (err)
                 return done(err);
@@ -56,20 +56,25 @@ passport.use('local-register',new LocalStrategy(
                     username: username,
                     password: bcrypt.hashSync(password, null, null),
                     idaccountcategory : 1,
-                    hoten :hoten,
-                    email : email,
-                    DOB : DOB,
+                    hoten :req.body.hoten,
+                    email : req.body.email,
+                    DOB : req.body.DOB
                 };
                 const newUser = {
                     username: username,
                     password: bcrypt.hashSync(password, null, null),
+                    ida : null,
+                    idaccountcategory : 1,
+                    hoten :req.body.hoten,
+                    email : req.body.email,
+                    DOB : req.body.DOB
                 };
-
-                const insertQuery = "INSERT INTO account ( username, password , idaccountcategory, hoten,email,DOB ) values (?,?,?)";
-                connection.query(insertQuery,[newUserMysql.username, newUserMysql.password,newUserMysql.idaccountcategory
-                    ,newUserMysql.hoten,newUserMysql.email,newUserMysql.DOB],function(err, rows) {
-                    newUser.ida = rows;
-
+                console.log(newUserMysql.DOB);
+                const insertQuery = "INSERT INTO account ( username, password , idaccountcategory, hoten,email,	BOD ) values (?,?,?,?,?,?)";
+                connection.query(insertQuery,[newUserMysql.username,newUserMysql.password,newUserMysql.idaccountcategory,newUserMysql.hoten,
+                    newUserMysql.email,newUserMysql.DOB],function(err, rows) {
+                    if (err) return done(err);
+                    newUser.ida = rows.insertId;
                     return done(null, newUser);
                 });
             }

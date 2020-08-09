@@ -68,7 +68,7 @@
                             <div class="form-group row">
                                 <label for="TextDOB" class="col-md-4 col-form-label text-md-right">Date of Birth</label>
                                 <div class="col-md-6">
-                                    <input type="date" id="TextDOB" class="form-control" name = "DOB" value = "{{user.DOB}}">
+                                    <input type="date" id="TextDOB" class="form-control" name = "DOB" value = {{user.BOD}}>
                                 </div>
                             </div>
 
@@ -84,3 +84,6 @@
         </div>
     </div>
 </div>
+{{#section 'js'}}
+
+{{/section}}
