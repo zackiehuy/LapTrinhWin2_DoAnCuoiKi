@@ -36,5 +36,16 @@ module.exports = {
         return db.load(`SELECT n.title,n.date,n.image,sc.name,n.date,n.abstract FROM (${tbl_newspaper} as n join 
             newssubcategory as ns on n.idnews = ns.idnews)join subcategory as sc on sc.idsubcategory =
              ns.idsubcategory WHERE ns.idsubcategory = ${id} WHERE n.status = 2`);
+    },
+    singlenews: function(id){
+        return db.load(`SELECT * FROM ${tbl_newspaper} as n JOIN maincategory as mc ON n.idmaincategory = mc.idmaincategory
+        WHERE ${id} = n.idnews`);
+    },
+    singletags: function(id){
+        return db.load(`SELECT * FROM tag WHERE ${id} = idnews`);
+    },
+    singlesub: function(id){
+        return db.load(`SELECT * FROM subcategory as sc JOIN newssubcategory as nsc ON 
+        sc.idsubcategory = nsc.idsubcategory WHERE ${id} = nsc.idnews`);
     }
 }

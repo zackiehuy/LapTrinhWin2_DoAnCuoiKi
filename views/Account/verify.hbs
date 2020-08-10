@@ -41,19 +41,18 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Forget Password</div>
+                    <div class="card-header">Verify</div>
                     <div class="card-body">
-                        <form name="my-form" action="checkout" method="POST">
+                        <form name="my-form" action="verify" method="POST">
                             <div class="form-group row">
-                                <label for="Txtusername" class="col-md-4 col-form-label text-md-right">Username</label>
+                                <label for="Txtusername" class="col-md-4 col-form-label text-md-right">Nhập OTP</label>
                                 <div class="col-md-6">
-                                    <input type="text" id="Txtusername" class="form-control" name="username">
-                                    <small class="text-muted">We will send you OTP to your email!!!</small>
-                                </div>                                  
+                                    <input type="text" id="Txtusername" class="form-control" name="otp">
+                                </div>  
                             </div>
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary" >
-                                    SEND
+                                    VERIFY
                                 </button>
                             </div>
                         </form>

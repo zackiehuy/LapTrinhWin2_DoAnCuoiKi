@@ -55,7 +55,10 @@ router.get('/profile', function(req,res,next){
             next();
         }
       res.app.locals.layout = 'subcriber';
-      res.app.locals.username = req.user.username;
+      if(res.app.locals.username.length === undefined)
+      {
+        res.app.locals.username = req.user.username;
+      }
       if(req.isAuthenticated())
           return next();
       res.redirect('/'); 
@@ -79,10 +82,12 @@ router.post('/checkout',async function(req,res)
   const user = req.body.username;
   const rows = await tbl_account.forget(user);
   const userotp = req.body.username;
-  const secret  = otp.generateSecret();
-  const imageUrl = otp.generateQRCode(userotp,secret);
-  console.log(imageUrl);
-  console.log({imageUrl});
+  const secret  = otp.secret;
+  const token = otp.token(secret);
+  const verify = otp.verify(token,secret);
+  console.log(secret);
+  console.log(token);
+  
   if(rows[0].length === 0)
   {
     alert(`Username is wrong`)
@@ -109,7 +114,7 @@ router.post('/checkout',async function(req,res)
                 <h4 style="color: #0085ff">Xin chào ${rows[0].hoten},</h4>
                 <div><span>Chúng tôi nhận được phản hồi quên mật khẩu từ bạn</span></div>
                 <div><span style="color: black">Đây là mã OTP</span></div>
-                <div><h3>${{imageUrl}}</h3></div>
+                <div><h1>${token}</h1></div>
             </div>
         </div>
     `;
@@ -128,10 +133,46 @@ router.post('/checkout',async function(req,res)
         } else {
             console.log('Message sent: ' +  info.response);
             req.flash('mess', 'Một email đã được gửi đến tài khoản của bạn'); //Gửi thông báo đến người dùng
-            res.redirect('/');
+            req.app.locals.username = rows[0].username;
+            req.app.locals.password = rows[0].password;
+            req.app.locals.token = token;
+            res.redirect('verify');
         }
     });
   }
+})
+
+router.get("/verify",function(req,res){
+  res.render('Account/verify');
+});
+
+router.post("/verify",function(req,res){
+    console.log(req.app.locals.password);
+    console.log(req.app.locals.token);
+    if(req.app.locals.token === req.body.otp)
+    {
+      res.redirect('newpassword');
+    }
+    else
+    {
+      res.redirect('verify');
+    }
+});
+
+router.get('/newpassword',function(req,res){
+  res.render('Account/newpassword',{
+    password: req.app.locals.password
+  })
+})
+
+router.post('/newpassword',async function(req,res){
+  acc = {
+    username : req.app.locals.username,
+    password : req.body.newpassword
+  } 
+  await tbl_account(acc);
+  req.isAuthenticated()  = true;
+  res.redirect('profile');
 })
 
 // =====================================

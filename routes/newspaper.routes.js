@@ -21,4 +21,20 @@ router.get('/', async function(req,res){
     })
 })
 
+router.get('/detail/:id',async function(req,res){
+    const idnews = +req.param.id || -1;
+    const news = await model_newspaper.singlenews(idnews);
+    const tags = await model_newspaper.singletags(idnews);
+    const subcategory = await model_newspaper.singlesub(idnews);
+    res.render('Newspaper/detail',{
+        news,
+        tags,
+        subcategory
+    })
+});
+
+router.get('/search',async function(req,res){
+    
+})
+
 module.exports= router;
