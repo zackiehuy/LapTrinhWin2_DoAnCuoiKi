@@ -14,7 +14,6 @@
         <th scope="col" class="text-center">#</th>
         <th scope="col">Tittle</th>
         <th scope="col">Abstract</th>
-        <th scope="col">Content</th>
         <th scope="col">Category</th>        
         <th scope="col">&nbsp;</th>
       </tr>
@@ -22,10 +21,9 @@
     <tbody>
       {{#each this.listwait}}
       <tr>
-        <th scope="row" class="text-center"></th>
+        <th scope="row" class="text-center">{{idnews}}</th>
         <td>{{tittle}}</td>
         <td>{{ab}}</td>
-        <td>{{content}}</td>
         <td>{{name}}</td>
         <td class="text-right">
           <a class="btn btn-primary btn-sm" href= "/admin/Writter/edit/{{idnews}}" role="button">

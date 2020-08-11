@@ -4,6 +4,15 @@ const db = require('../models/writters.model');
 
 const router = express.Router();
 
+router.all('/*',function(req,res,next){
+  res.app.locals.layout = 'subcriber';
+  if(!req.isAuthenticated())
+  {
+      res.redirect(`/account/login?retUrl=${req.originalUrl}`);
+  }
+  next();
+});
+
 
 router.post('/add', async function (req, res) {
   newspaper = {
@@ -69,10 +78,10 @@ router.post('/add', function (req, res) {
 })
 
 router.get('/list',async function (req, res) {
-  const listaccept = await db.listaccept(1);
-  const listrefuse = await db.listrefuse(1);
-  const listwait = await db.listwait(1);
-  const tag = await db.singletag(1);
+  const listaccept = await db.listaccept(res.app.locals.id);
+  const listrefuse = await db.listrefuse(res.app.locals.id);
+  const listwait = await db.listwait(res.app.locals.id);
+  const tag = await db.singletag(res.app.locals.id);
 
   res.render('admin/Writter/list',{
         listaccept,
@@ -86,12 +95,8 @@ router.get('/list',async function (req, res) {
 })
 
 router.get('/edit/:idnews',async function (req, res) {
-  const idnews = +req.param.idnews || -1;
-  const row = await db.single(idnews);
-  if(row.length === 0)
-  {
-    return res.send('Invalid parameter.');
-  } 
+  const row = await db.single(req.params.idnews);
+  console.log(row[0]);
   const news = row[0];
   res.render('admin/Writter/edit',{
     news
@@ -99,14 +104,16 @@ router.get('/edit/:idnews',async function (req, res) {
 })
 
 router.post('/update',async function(req,res){
+  console.log(req.body.content);
   newspaper = {
+    idnews : req.body.idnews,
     tittle : req.body.tittle,
     abstract : req.body.abstract,
     content : req.body.content,
-    category : req.body.category
+    idmaincategory : req.body.idmaincategory
   };
-  await db.patch()
-  tagnews1 = {
+  await db.patch(newspaper);
+  /*tagnews1 = {
     idnews : id.idnews, 
     tag : req.body.tag1
   }
@@ -126,6 +133,8 @@ router.post('/update',async function(req,res){
     idnews : id.idnews, 
     tag : req.body.tag5
   }
+  */
+ res.redirect('list');
 })
 
 module.exports = router;

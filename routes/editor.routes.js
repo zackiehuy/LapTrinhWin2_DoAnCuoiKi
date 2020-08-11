@@ -2,6 +2,15 @@ const express = require('express');
 const model_editor = require('../models/editor.models');
 const router = express.Router();
 
+router.all('/*',function(req,res,next){
+    res.app.locals.layout = 'subcriber';
+    if(!req.isAuthenticated())
+    {
+        res.redirect(`/account/login?retUrl=${req.originalUrl}`);
+    }
+    next();
+  });
+
 router.get('/list', async function(req,res ){
     const list = await model_editor.all(1);
     

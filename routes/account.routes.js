@@ -58,6 +58,7 @@ router.get('/profile', function(req,res,next){
       if(res.app.locals.username.length === undefined)
       {
         res.app.locals.username = req.user.username;
+        res.app.locals.id = req.user.ida;
       }
       if(req.isAuthenticated())
           return next();
@@ -135,6 +136,7 @@ router.post('/checkout',async function(req,res)
             req.flash('mess', 'Một email đã được gửi đến tài khoản của bạn'); //Gửi thông báo đến người dùng
             req.app.locals.username = rows[0].username;
             req.app.locals.password = rows[0].password;
+            req.app.locals.password = rows[0].ida;
             req.app.locals.token = token;
             res.redirect('verify');
         }
@@ -186,6 +188,7 @@ router.get('/logout', function(req, res) {
 
 router.get('/isLogin',function(req,res,next){
   res.app.locals.username = req.user.username;
+  res.app.locals.id = req.user.ida;
     if(req.isAuthenticated())
         return next();
     res.redirect('/'); 
@@ -208,7 +211,7 @@ router.get('/isLogin',function(req,res,next){
         }
         else if((accountcategory === 2))
         {
-            res.redirect('admin/Writter/list');
+            res.redirect('/admin/Writter/list');
         }
         else if((accountcategory === 3))
         {
