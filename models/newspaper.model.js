@@ -24,21 +24,17 @@ module.exports = {
         idmaincategory WHERE idsubcategory = ${id} AND WHERE n.status = 2`);
     },
     allmaincategory: function(id){
-        return db.load(`SELECT title,date,image,name,date,abstract FROM ${tbl_newspaper} join maincategory on
-        idmaincategory WHERE idmaincategory = ${id} AND WHERE n.status = 2`);
+        return db.load(`SELECT idnews,tittle,date,image,name,date,abstract,n.idmaincategory as idmaincategory FROM ${tbl_newspaper} as n join maincategory as mc on
+        n.idmaincategory = mc.idmaincategory WHERE n.idmaincategory = ${id} AND n.status = 2`);
     },
     allsubcategory: function(id){
-        return db.load(`SELECT n.title,n.date,n.image,sc.name,n.date,n.abstract FROM (${tbl_newspaper} as n join 
-            newssubcategory as ns on n.idnews = ns.idnews)join subcategory as sc on sc.idsubcategory =
-             ns.idsubcategory WHERE ns.idsubcategory = ${id} WHERE n.status = 2`);
+        return db.load(`SELECT * FROM newssubcategory WHERE idsubcategory = ${id}`);
     },
     alltag: function(id){
-        return db.load(`SELECT n.title,n.date,n.image,sc.name,n.date,n.abstract FROM (${tbl_newspaper} as n join 
-            newssubcategory as ns on n.idnews = ns.idnews)join subcategory as sc on sc.idsubcategory =
-             ns.idsubcategory WHERE ns.idsubcategory = ${id} WHERE n.status = 2`);
+        return db.load(`SELECT * FROM tag WHERE name = '${id}'`);
     },
     singlenews: function(id){
-        return db.load(`SELECT * FROM ${tbl_newspaper} as n JOIN maincategory as mc ON n.idmaincategory = mc.idmaincategory
+        return db.load(`SELECT *,n.idmaincategory as idmain FROM ${tbl_newspaper} as n JOIN maincategory as mc ON n.idmaincategory = mc.idmaincategory
         WHERE ${id} = n.idnews`);
     },
     singletags: function(id){
@@ -47,5 +43,14 @@ module.exports = {
     singlesub: function(id){
         return db.load(`SELECT * FROM subcategory as sc JOIN newssubcategory as nsc ON 
         sc.idsubcategory = nsc.idsubcategory WHERE ${id} = nsc.idnews`);
+    },
+    fulltexttittle: function(id){
+        return db.load(`SELECT * FROM newspaper WHERE MATCH(tittle) AGAINST('${id}' IN NATURAL LANGUAGE MODE)`);
+    },
+    fulltexcontent: function(id){
+        return db.load(`SELECT * FROM newspaper WHERE MATCH(content) AGAINST('${id}' IN NATURAL LANGUAGE MODE)`);
+    },
+    fulltextabstract: function(id){
+        return db.load(`SELECT * FROM newspaper WHERE MATCH(abstract) AGAINST('${id}' IN NATURAL LANGUAGE MODE)`);
     }
 }

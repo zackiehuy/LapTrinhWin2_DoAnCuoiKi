@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{{_sections.title}}}</title>
+    <link rel = "icon" href =  "/public/imgs/14711.png" type = "image/x-icon"> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     {{{_sections.css}}}
@@ -19,11 +20,11 @@
                                 {{#each subCategory}}
                                     <li class = "nav-item active col-sm">
                                         {{#each a}}
-                                        <a class="nav-link" href="#" aria-hidden="true">/ &nbsp; {{name}}</a>
+                                        <a class="nav-link" href="/maincategory/:{{idmaincategory}}" aria-hidden="true">/ &nbsp; {{name}}</a>
                                         {{/each}}   
                                             {{#each b}}
                                             <ul>                                        
-                                                <li><a class="nav-link" href="#">{{namesub}}</a></li>                                        
+                                                <li><a class="nav-link" href="/subcategory/:{{idsubcategory}}">{{namesub}}</a></li>                                        
                                             </ul>     
                                             {{/each}}                                                         
                                     </li>
@@ -42,7 +43,7 @@
                                 </li>
                                 {{#each lcMaincategory}}
                                     <li class = "nav-item {{#if isActive}}active{{/if}}">
-                                        <a class="nav-link" href="#">{{name}} <span class="sr-only">(current)</span></a>
+                                        <a class="nav-link" href="/maincategory/:{{idmaincategory}}">{{name}} <span class="sr-only">(current)</span></a>
                                     </li>
                                 {{/each}}
                             </ul>

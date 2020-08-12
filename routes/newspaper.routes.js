@@ -34,7 +34,57 @@ router.get('/detail/:id',async function(req,res){
 });
 
 router.get('/search',async function(req,res){
+    const search = req.body.search;
+    
     res.render('Newspaper/search');
+});
+
+router.get('/maincategory/:id',async function(req,res){
+    const idmaincategory = +req.params.id || -1;
+    for (const c of res.locals.mainCategory) {
+        if (c.CatID === +req.params.id) {
+          c.isActive = true;
+        }
+    }
+    const news = await model_newspaper.allmaincategory(idmaincategory);
+    res.render('Newspaper/maincategory',{
+       news 
+    });
+});
+
+router.get('/subcategory/:id',async function(req,res){
+    const idsubcategory = +req.params.id || -1;
+    const subcategory = await model_newspaper.allsubcategory(idsubcategory);
+    for (const c of res.locals.subCategory) {
+        if (c.CatID === +req.params.id) {
+          c.isActive = true;
+        }
+    }
+    console.log(subcategory.length);
+    const news = [];
+    for(let i = 0 ; i < subcategory.length;i++)
+    {
+        const rows = await model_newspaper.singlenews(subcategory[i].idnews);
+        news.push(rows);
+    }
+    res.render('Newspaper/subcategory',{
+       news
+    });
+});
+
+router.get('/tag',async function(req,res){
+    const nametag = req.query.name || "1";
+    const tag = await model_newspaper.alltag(nametag);
+    const news = [];
+    for(let i = 0 ; i < tag.length;i++)
+    {
+        const rows = await model_newspaper.singlenews(tag[i].idnews);
+        news.push(rows);
+    }
+    res.render('Newspaper/tag',{
+        nametag,
+        news
+    })
 })
 
 module.exports= router;

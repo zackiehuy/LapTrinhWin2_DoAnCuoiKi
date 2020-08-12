@@ -1,0 +1,86 @@
+
+{{#section 'title'}}
+    SEARCH
+{{/section}}
+{{#section 'css'}}
+    <style>
+        .single-blog-post.small-featured-post .post-data .post-date {
+    margin-bottom: 0;
+    line-height: 1;
+},
+        .single-blog-post .post-data .post-title {
+},
+        * {
+    margin: 0;
+    padding: 0;
+},
+        .single-blog-post.small-featured-post .post-data .post-catagory {
+    margin-bottom: 10px;
+    line-height: 1;
+},
+        .single-blog-post.small-featured-post .post-data {
+    padding: 0;
+        margin-right: 10px;
+},
+        img {
+    height: auto;
+    max-width: 50%;
+},
+        .single-blog-post .post-thumb a {
+    display: flex;
+},
+        .single-blog-post.small-featured-post .post-thumb {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 90px;
+    flex: 0 0 90px;
+    max-width: 90px;
+    margin-right: 15px;
+},
+    .single-blog-post.small-featured-post:first-child {
+    padding-top: 0;
+},
+    .row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+},
+    body {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+}
+
+    </style>
+{{/section}}
+
+
+<div class = "container">
+    <div class = "row">
+        <div class = "col-12 col-md-6 col-lg-12">
+            {{#each news}}
+            <div class="single-blog-post small-featured-post d-flex">
+                <div class="post-thumb w-50">
+                    <a href=""> 
+                        <img class = "w-100" src = "{{image}}" alt>                       
+                    </a>
+                </div>
+                <div class="post-data ml-4">
+                    <a href ="Newspaper/maincategory/:{{idmaincategory}}" class = "post-catagory" style="color:black">{{name}}</a>
+                    <div class="post-meta">
+                        <h2 class ="post-title">
+                            <a href ="Newspaper/detail/:{{idnews}}">{{tittle}}</a>
+                        </h2>
+                        <p>{{abstract}}</p>
+                        <p class = "post-date">
+                            {{date}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            {{/each}}
+        </div>
+    </div>
+</div>

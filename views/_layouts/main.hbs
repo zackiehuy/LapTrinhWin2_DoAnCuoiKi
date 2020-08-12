@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{{_sections.title}}}</title>
+    <link rel = "icon" href =  "/public/imgs/14711.png" type = "image/x-icon"> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     {{{_sections.css}}}
@@ -19,13 +20,13 @@
                                 {{#each subCategory}}
                                     <li class = "nav-item active col-sm">
                                         {{#each a}}
-                                        <a class="nav-link" href="#" aria-hidden="true">/ &nbsp; {{name}}</a>
+                                        <a class="nav-link" href="/maincategory/:{{maincategory}}" aria-hidden="true">/ &nbsp; {{name}}</a>
                                         {{/each}}   
-                                            {{#each b}}
-                                            <ul>                                        
-                                                <li><a class="nav-link" href="#">{{namesub}}</a></li>                                        
-                                            </ul>     
-                                            {{/each}}                                                         
+                                        {{#each b}}
+                                        <ul>                                        
+                                            <li><a class="nav-link" href="/subcategory/:{{idsubcategory}}">{{namesub}}</a></li>                                        
+                                        </ul>     
+                                        {{/each}}                                                         
                                     </li>
                                 {{/each}}  
                             </ul>
@@ -42,7 +43,7 @@
                                 </li>
                                 {{#each lcMaincategory}}
                                     <li class = "nav-item {{#if isActive}}active{{/if}}">
-                                        <a class="nav-link" href="#">{{name}} <span class="sr-only">(current)</span></a>
+                                        <a class="nav-link" href="/maincategory/:{{maincategory}}">{{name}} <span class="sr-only">(current)</span></a>
                                     </li>
                                 {{/each}}
                             </ul>
@@ -53,8 +54,8 @@
                         <button   class="navbar-toggler mr-sm-3" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>            
                         </button>
-                        <input class="form-control mr-sm-3" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        <input class="form-control mr-sm-3" type="search" placeholder="Search" aria-label="Search" name = "search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" formaction="/search">Search</button>
                     </form> 
                 </div>
                 <div class="dropdown">
@@ -63,7 +64,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="/account/login">Log in</a>
-                            <a class="dropdown-item" href="#">Register</a>
+                            <a class="dropdown-item" href="/account/register">Register</a>
                         </div>
                 </div>
             </nav>

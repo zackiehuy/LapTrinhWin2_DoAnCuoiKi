@@ -1,4 +1,7 @@
 
+{{#section 'title'}}
+    SEARCH
+{{/section}}
 {{#section 'css'}}
     <style>
         .single-blog-post.small-featured-post .post-data .post-date {
@@ -47,12 +50,19 @@
     body {
     font-family: "Roboto", sans-serif;
     font-size: 14px;
-}
+},
+    a {
+        text-decoration: none;
+        color:black
+    }
+    a :hover{
+        color : red;
+    }
 
     </style>
 {{/section}}
 
-<h4>Kết quả cho </h4>>
+<h4>Kết quả cho </h4>
 </br>
 <div class = "container">
     <div class = "row">
@@ -64,10 +74,29 @@
                     </a>
                 </div>
                 <div class="post-data ml-4">
+                    <a href ="" class = "post-catagory" style = "text-decoration: none;color:black">cool</a>
+                    <div class="post-meta">
+                        <h2 class = "post-title">
+                            <a href ="" style="color:black">aaaa</a>
+                        </h2>
+                        <p>social</p>
+                        <p class = "post-date">
+                                23/4/2020
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="single-blog-post small-featured-post d-flex">
+                <div class="post-thumb w-50">
+                    <a href=""> 
+                        <img class = "w-100" src = "../../public/imgs/Untitled1.png" alt>                       
+                    </a>
+                </div>
+                <div class="post-data ml-4">
                     <a href ="" class = "post-catagory">cool</a>
                     <div class="post-meta">
-                        <span class="subheading"></span>
-                        <h2 post-title>
+                        <h2 class ="post-title">
                             <a href ="">aaaa</a>
                         </h2>
                         <p>social</p>
