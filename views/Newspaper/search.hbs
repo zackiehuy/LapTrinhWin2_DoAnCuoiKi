@@ -1,38 +1,42 @@
 
 {{#section 'css'}}
     <style>
-        .case {
-    width: 100%;
-    margin-bottom: 50px;
-    },
-    .case .text .subheading {
-    font-weight: 500;
-    font-size: 14px;
-    display: inline-block;
+        .single-blog-post.small-featured-post .post-data .post-date {
+    margin-bottom: 0;
+    line-height: 1;
+},
+        .single-blog-post .post-data .post-title {
+},
+        * {
+    margin: 0;
+    padding: 0;
+},
+        .single-blog-post.small-featured-post .post-data .post-catagory {
     margin-bottom: 10px;
-    color: rgba(0, 0, 0, 0.2);
-    text-transform: uppercase;
-    },
-    .case .text .meta p {
-    font-size: 12px;
-    color: rgba(0, 0, 0, 0.2);
-    },
-    .mb-0, .my-0 {
-    margin-bottom: 0 !important;
-    },
-    .case .text h2 {
-    font-size: 40px;
-    font-weight: 700;
-    margin-bottom: 30px;
+    line-height: 1;
 },
-.case .text h2 a {
-    color: #000000;
+        .single-blog-post.small-featured-post .post-data {
+    padding: 0;
+        margin-right: 10px;
 },
-.container {
-    max-width: 1210px;
+        img {
+    height: auto;
+    max-width: 50%;
 },
-.row {
-    display: -webkit-box;
+        .single-blog-post .post-thumb a {
+    display: flex;
+},
+        .single-blog-post.small-featured-post .post-thumb {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 90px;
+    flex: 0 0 90px;
+    max-width: 90px;
+    margin-right: 15px;
+},
+    .single-blog-post.small-featured-post:first-child {
+    padding-top: 0;
+},
+    .row {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
@@ -40,72 +44,39 @@
     margin-right: -15px;
     margin-left: -15px;
 },
-.col-md-12 {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-},
-.col-md-6 {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 50%;
-    flex: 0 0 50%;
-    max-width: 50%;
-},
-.case .img {
-    height: 400px;
-},
-.pl-md-3, .px-md-3 {
-    padding-left: 1rem !important;
-},
-.ftco-section {
-    padding: 7em 0;
-    position: relative;
-},
-body {
-    font-family: "Poppins", Arial, sans-serif;
-    background: #fff;
-    font-size: 16px;
-    line-height: 1.8;
-    font-weight: 400;
-    color: gray;
+    body {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
 }
+
     </style>
 {{/section}}
 
-<form class="form-inline" >
-    <button   class="navbar-toggler mr-sm-3" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>            
-    </button>
-    <input class="form-control mr-sm-3" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-</form>
+<h4>Kết quả cho </h4>>
 </br>
-<div class = "ftco-section">
 <div class = "container">
     <div class = "row">
-        <div class = "case">
-            <div class = "row">
-                <div class = "col-md-6 col-lg-6 col-xl-8 d-flex">
-                    <a href="" class="img w-100 mb-3 mb-md-0" style="background-image: url(../../public/imgs/Untitled1.png);">                        
+        <div class = "col-12 col-md-6 col-lg-12">
+            <div class="single-blog-post small-featured-post d-flex">
+                <div class="post-thumb w-50">
+                    <a href=""> 
+                        <img class = "w-100" src = "../../public/imgs/Untitled1.png" alt>                       
                     </a>
                 </div>
-                <div class="col-md-6 col-lg-6 col-xl-4 d-flex">
-                    <div class="text w-100 pl-md-3">
-                        <span class="subheading"><a href ="">cool</a></span>
-                        <h2>
+                <div class="post-data ml-4">
+                    <a href ="" class = "post-catagory">cool</a>
+                    <div class="post-meta">
+                        <span class="subheading"></span>
+                        <h2 post-title>
                             <a href ="">aaaa</a>
                         </h2>
                         <p>social</p>
-                        <div class = "meta">
-                            <p class = "mb-0">
+                        <p class = "post-date">
                                 23/4/2020
-                            </p>
-                        </div>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
