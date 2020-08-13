@@ -1,0 +1,369 @@
+ 
+{{#section 'title'}}
+    {{this.news.tittle}}
+{{/section}}
+ {{#section 'css'}}
+    <style>
+        section div p:hover{
+        color:mediumblue;
+    }
+        .the-article {
+    z-index: 9;
+    font-size: 1rem;
+    position: relative;
+    padding: 50px 0 50px;
+}
+        .the-article-header {
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+        .the-article-category {
+    text-transform: uppercase;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    font-size: 1em;
+    font-weight: 300;
+}
+    .the-article-category a {
+    color: #888;
+}
+    a {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+}
+    .the-article-title {
+    font-family: 'Noto Serif',serif;
+    font-size: 2.4em;
+    color: #000;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin: 10px 0;
+}
+    ul { 
+    float: left;
+    width: 100%;
+    font-family: sans-serif;
+    font-size: 0.85em;
+    color: #888;
+}
+    .the-article .main {
+    background: #FFF;
+    float: left;
+    width: 100%;
+    position: relative;
+}
+.the-article-summary {
+    font-family: 'Noto Serif',serif;
+    font-size: 1.1em;
+    line-height: 1.618;
+    font-weight: bold;
+    color: #333;
+    clear: both;
+    float: left;
+    width: 100%;
+    margin: 0 0 18px;
+}
+.the-article-body {
+    float: left;
+    width: 100%;
+    position: relative;
+    font-family: 'Noto Serif',serif;
+    color: #333;
+    line-height: 1.618;
+    font-size: 1.1em;
+}
+.the-article-body>*:nth-child(1) {
+    float: none;
+    margin-top: 0 !important;
+    width: 100%;
+}
+.the-article-body p {
+    margin: 18px 0;
+}
+.the-article-tags {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    white-space: nowrap;
+    margin-top: 10px;
+    font-size: 0.75em;
+    color: #888;
+    line-height: 1.618;
+    float: left;
+    width: 100%;
+}
+.the-article-tags i {
+    font-size: 20px;
+    color: #ccc;
+    float: left;
+    margin-right: 10px;
+}
+.the-article-tags strong, .the-article-tags a, .the-article-tags span {
+    background: #eee;
+    border-radius: 9px;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    color: #666;
+    float: left;
+    padding: 0 8px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+    body {
+    font-weight: normal;
+    margin-bottom: 50px;
+    position: relative;
+    padding-top: 52px;
+        overflow: visible !important;
+}
+    .page-wrapper{
+        padding: 0 10%;
+    }
+    section img {
+        width :1000px;
+        height: auto;
+    }
+    .the-article-comment {
+    float: left;
+    clear: both;
+    width: 100%;
+    margin: 20px 0 0;
+}
+    .comment-widget {
+    font-family: Arial, Helvetica, sans-serif;
+    float: left;
+    width: 100%;
+    margin: 15px 0 0;
+}
+    .comment-widget .comment-list {
+    float: left;
+    width: 100%;
+    padding: 10px 0;
+}
+    .comment-widget .comment-list .list-header {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    padding-bottom: 0;
+    margin-bottom: 15px;
+}
+    .comment-widget .comment-list .list-header .list-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: bold;
+}
+    .comment-widget .comment-form {
+    width: 100%;
+    position: relative;
+    float: left;
+    padding-left: 40px;
+}
+    .comment-widget .comment-editor {
+    position: relative;
+    margin-bottom: 7px;
+    float: left;
+    width: 100%;
+}
+    .comment-widget .comment-editor .comment-input {
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #333;
+    line-height: 22px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    height: 55px;
+    min-height: 55px;
+    padding: 10px 15px;
+    margin: 0 0;
+    outline: none;
+    border: 1px solid #999999;
+    background-color: #FFF;
+    overflow: hidden;
+    resize: none !important;
+    -webkit-transition: height .3s;
+    transition: height .3s;
+}
+    .comment-widget .comment-form .button.btnSubmit {
+    color: #FFF;
+    border-radius: 2px;
+    background-color: #4d68a4;
+    padding: 10px 30px;
+    -webkit-transition: opacity .25s;
+    transition: opacity .25s;
+}
+    .comment-widget .comment-form .note {
+    float: right;
+    font-size: 11px;
+    color: #aaa;
+}
+    .comment-widget .comment-form .note span {
+    display: none;
+    margin-left: 15px;
+    text-align: right;
+    line-height: 1.4;
+}
+    .comment-widget .comment-list .comments:not(.replies) {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    margin-top: 30px;
+}
+    .comment-widget .comment {
+    float: left;
+    width: 100%;
+    padding: 18px 0 18px;
+    padding-left: 40px;
+    position: relative;
+    border-bottom: 1px solid #eee;
+}
+    .comment-widget .comment .comment-meta {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #141823;
+    line-height: 20px;
+    width: 100%;
+    float: left;
+    margin-bottom: 5px;
+}
+    .comment-widget .comment .comment-meta .author {
+    color: #000;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 19px;
+    display: inline-block;
+    margin-bottom: 0;
+    margin-top: 2px;
+}
+    .comment-widget .comment .comment-meta .author .author-name {
+    margin-right: 10px;
+}
+    .comment-widget .comment .comment-meta .author .time {
+    color: #666;
+    font-size: 11px;
+    display: inline-block;
+    font-weight: normal;
+    line-height: normal;
+}
+    .comment-widget .comment .comment-meta .comment-content {
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.43;
+    margin-top: 5px;
+}
+    </style>
+ {{/section}}
+
+ <div class = "page-wrapper">
+     <article class = "the-artical type-text" style="word-break:break-all">
+        <header class = "the-artical-header">
+            <p class = "the-article-category">
+                <a href = "/maincategory:{{this.news.idmain}}">{{this.news.name}}a</a>
+            </p>
+            <h1 class = "the-artical-title">{{this.news.tittle}}the-article-bodya</h1>
+            <ul class = "the-artical-meta">{{this.news.date}}a</ul>
+        </header>
+        <section class = "main">
+            <p class = "the-artical-summary" style="font-weight: bold;color: #333;">{{this.news.abstract}} a</p>
+            <img src = "../../public/imgs/Untitled1.png"></img>
+            <div class = "the-artical-body">
+                {{this.news.content}}
+            </div>
+            <p class = "the-artical-tags" style="font-weight: bold;">
+                Category:
+                {{#each subcategory}}
+                <a href="/subcategory/{{this.idsubcategory}}">{{this.name}}</a>
+                {{/each}}
+            </p>
+            <p class = "the-artical-tags"  style="font-weight: bold;">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+                {{#each tags}}
+                <a href="/tag?{{this.name}}">{{this.name}}</a>
+                {{/each}}
+            </p>
+            <section class = "the-article-comment">
+                <div class ="comment-widget">
+                    <div class = "comment-list">
+                        <div class = "list-header">
+                            <h4 class = "list-title">Ý kiến
+                                <strong>{{this.count}}</strong>
+                            </h4>
+                        </div>
+                        {{#if empty}}
+
+                        {{else}}
+                        <div class = "comment-form">
+                            <div class ="comment-editor">
+                                <textarea class="comment-input" name = "comment" placeholder="Bạn nghĩ gì về tin này?" 
+                                style="overflow: hidden; overflow-wrap: break-word; height: 53px;"></textarea>
+                            </div>
+                            <a class = "button btnSubmit" href = "/addcomment?idnews={{this.news.idnews}}&idaccount={{this.ida}}">Gửi bình luận</a>
+                        </div>
+                        {{/if}}
+                        <ul class = "comment expanded">
+                            <li class ="comment">
+                                {{#each comment}}
+                                <div class = "comment-meta">
+                                    <p class = "author">
+                                        <span class = "author-name">{{this.hoten}}</span>
+                                        <span class = "time">{{this.datecmt}}</span>
+                                    </p>
+                                    <p class = "comment-content">
+                                        {{this.content}}
+                                    </p>
+                                </div>
+                                {{/each}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </section>
+     </article>
+ </div>
+
+<div class = "container">
+    <h2><i class="fa fa-newspaper-o" aria-hidden="true"></i> Các bài viết liên quan</h2>
+    <div class = "row">
+        <div class = "col-12 col-md-6 col-lg-12">
+            {{#each this.newsrandom}}
+            <div class="single-blog-post small-featured-post d-flex">
+                <div class="post-thumb w-50">
+                    <a href=""> 
+                        <img class = "w-100" src = "{{this.image}}" alt>                       
+                    </a>
+                </div>
+                <div class="post-data ml-4">
+                    <a href ="" class = "post-catagory" style = "text-decoration: none;color:black">{{this.new.name}}</a>
+                    <div class="post-meta">
+                        <h2 class = "post-title">
+                            <a href ="" style="color:black">{{this.tittle}}</a>
+                        </h2>
+                        <p>{{this.abstract}}</p>
+                        <p class = "post-date">
+                            {{this.date}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            </br>
+            {{/each}}
+        </div>
+    </div>
+</div>

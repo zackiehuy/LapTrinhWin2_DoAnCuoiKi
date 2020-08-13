@@ -23,20 +23,36 @@ router.get('/', async function(req,res){
 
 router.get('/detail/:id',async function(req,res){
     const idnews = +req.params.id || -1;
-    const news = await model_newspaper.singlenews(idnews);
+    const rowsnews = await model_newspaper.singlenews(idnews);
     const tags = await model_newspaper.singletags(idnews);
     const subcategory = await model_newspaper.singlesub(idnews);
+    const news = rowsnews[0];
+    const rowscount = await model_newspaper.count(idnews);
+    const count = rowscount[0];
+    const newsrandom = await model_newspaper.newsrandom(news.idmaincategory);
+    const comment = await model_newspaper.comment(idnews);
+    const account = req.app.locals.ida;
     res.render('Newspaper/detail',{
         news,
         tags,
-        subcategory
+        subcategory,
+        count,
+        newsrandom,
+        comment,
+        empty : account.length === 0
     })
 });
 
 router.get('/search',async function(req,res){
     const search = req.body.search;
-    
-    res.render('Newspaper/search');
+    const title = await model_newspaper.fulltexttittle(search);
+    const content = await model_newspaper.fulltexcontent(search);
+    const abstract = await model_newspaper.fulltextabstract(search);
+    res.render('Newspaper/search',{
+        title,
+        content,
+        abstract
+    });
 });
 
 router.get('/maincategory/:id',async function(req,res){
@@ -85,6 +101,20 @@ router.get('/tag',async function(req,res){
         nametag,
         news
     })
+});
+
+router.get('/adcomment',async function(req,res){
+    const today = new Date();
+    const datetime = new Date(today.getFullYear,today.getMonth,today.getDay,today.getHours,today.getMinutes,today.getSeconds);
+    comment = {
+        content: req.body.comment,
+        idnews: req.params.idnews,
+        idaccount : req.params.idaccount,
+        datecmt : datetime
+    } 
+    await model_newspaper.addcomment(comment);
+    res.redirect(`/detail/${req.params.idnews}`);
+    return;
 })
 
 module.exports= router;

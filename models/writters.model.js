@@ -38,7 +38,7 @@ module.exports = {
         }
         delete entity.idnews;
         return db.patch('newspaper', entity, condition);
-      },
+    },
     del: function (id) {
         const condition = {
           idnews: id

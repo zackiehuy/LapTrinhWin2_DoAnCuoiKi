@@ -35,7 +35,7 @@ module.exports = {
     },
     singlenews: function(id){
         return db.load(`SELECT *,n.idmaincategory as idmain FROM ${tbl_newspaper} as n JOIN maincategory as mc ON n.idmaincategory = mc.idmaincategory
-        WHERE ${id} = n.idnews`);
+        WHERE ${id} = n.idnews AND n.status = 2`);
     },
     singletags: function(id){
         return db.load(`SELECT * FROM tag WHERE ${id} = idnews`);
@@ -52,5 +52,17 @@ module.exports = {
     },
     fulltextabstract: function(id){
         return db.load(`SELECT * FROM newspaper WHERE MATCH(abstract) AGAINST('${id}' IN NATURAL LANGUAGE MODE)`);
+    },
+    comment : function(id){
+        return db.load(`SELECT *,n.idnews as idnews FROM comment as cm JOIN newspaper as n ON n.idnews = cm.idnews WHERE ${id} = idnews`);
+    },
+    newsrandom : function(id){
+        return db.load(`SELECT * FROM newspaper WHERE idmaincategory = ${id} ORDER BY RAND() LIMIT 4`);
+    },
+    count : function(id){
+        return db.load(`SELECT COUNT(idc) as count FROM comment WHERE idnews = ${id}`);
+    },
+    addcomment : function(entity){
+        return db.add('comment',entity);
     }
 }
