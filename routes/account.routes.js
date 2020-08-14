@@ -59,10 +59,7 @@ router.get('/profile', function(req,res,next){
       {
         res.app.locals.username = req.user.username;
         res.app.locals.id = req.user.ida;
-      }
-      if(req.isAuthenticated())
-          return next();
-      res.redirect('/'); 
+      } 
       },
     async function(req, res) {
       const ida = req.user.ida;

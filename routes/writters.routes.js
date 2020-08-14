@@ -1,71 +1,76 @@
 const express = require('express');
 const multer = require('multer');
 const db = require('../models/writters.model');
+const fs = require('fs');
 
 const router = express.Router();
 
 router.all('/*',function(req,res,next){
-  res.app.locals.layout = 'subcriber';
   if(!req.isAuthenticated())
   {
-      res.redirect(`/account/login?retUrl=${req.originalUrl}`);
+    res.app.locals.layout = 'admin';
+    res.redirect(`/account/login?retUrl=${req.originalUrl}`);
   }
   next();
 });
 
 
 router.post('/add', async function (req, res) {
+  
+  const requ = req.body;
+  console.log(req.body.tittle);
   newspaper = {
     tittle : req.body.tittle,
     abstract : req.body.abstract,
     content : req.body.content,
-    category : req.body.category
+    idmaincategory : 3,
+    writter :req.app.locals.id
   };
   await db.addnews(newspaper);
-  const id = await db.singletittle(req.body.title);
+  const id = await db.singletittle(req.body.tittle);
   tagnews1 = {
     idnews : id.idnews, 
-    tag : req.body.tag1
+    name : req.body.tag1
   }
   tagnews2 = {
     idnews : id.idnews, 
-    tag : req.body.tag2
+    name : req.body.tag2
   }
   tagnews3 = {
     idnews : id.idnews, 
-    tag : req.body.tag3
+    name : req.body.tag3
   }
   tagnews4 = {
     idnews : id.idnews, 
-    tag : req.body.tag4
+    name : req.body.tag4
   }
   tagnews5 = {
     idnews : id.idnews, 
-    tag : req.body.tag5
+    name : req.body.tag5
   }  
-  await db.addnews(tagnews1);
-  await db.addnews(tagnews2);
-  await db.addnews(tagnews3);
-  await db.addnews(tagnews4);
-  await db.addnews(tagnews5);
-})
-
-router.get('/add',async function (req, res) {
-  const listCategory = await db.allcategory(); 
-  res.render('admin/Writter/add',{
-    listCategory
-  });
-})
-
-router.post('/add', function (req, res) {
-  //.....
+  await db.addtagnews(tagnews1);
+  await db.addtagnews(tagnews2);
+  await db.addtagnews(tagnews3);
+  await db.addtagnews(tagnews4);
+  await db.addtagnews(tagnews5);
+  const img = {
+    idnews : id[0].idnews,
+    image: `./public/imgs/${id[0].idnews}/header`
+  }
+  await db.patch(img);
+  fs.mkdir(`./public/imgs/${id[0].idnews}`,function(err){
+    if(err)
+    {
+      console.log(err);
+    }
+  })
 
   const storage = multer.diskStorage({
     filename(req, file, cb) {
-      cb(null, file.originalname);
+      cb(null, 'header');
     },
     destination(req, file, cb) {
-      cb(null, './public/imgs');
+      cb(null, `./public/imgs/${id[0].idnews}`);
     }
   })
 
@@ -75,7 +80,17 @@ router.post('/add', function (req, res) {
       res.render('admin/Writter/add');
     else res.send('err');
   })
+
 })
+
+
+router.get('/add',async function (req, res) {
+  const listCategory = await db.allcategory(); 
+  res.render('admin/Writter/add',{
+    listCategory
+  });
+})
+
 
 router.get('/list',async function (req, res) {
   const listaccept = await db.listaccept(res.app.locals.id);

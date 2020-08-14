@@ -57,7 +57,7 @@ module.exports = {
         return db.load(`SELECT *,n.idnews as idnews FROM comment as cm JOIN newspaper as n ON n.idnews = cm.idnews WHERE ${id} = idnews`);
     },
     newsrandom : function(id){
-        return db.load(`SELECT * FROM newspaper WHERE idmaincategory = ${id} ORDER BY RAND() LIMIT 4`);
+        return db.load(`SELECT * FROM newspaper WHERE idmaincategory = ${id} ORDER BY RAND() LIMIT 5`);
     },
     count : function(id){
         return db.load(`SELECT COUNT(idc) as count FROM comment WHERE idnews = ${id}`);

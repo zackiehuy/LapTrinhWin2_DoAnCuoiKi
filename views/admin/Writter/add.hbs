@@ -1,4 +1,8 @@
 
+{{#section 'css'}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/css/fileinput.min.css">
+{{/section}}
+
 {{#section 'js'}}
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/fileinput.min.js"></script>
@@ -11,23 +15,82 @@
     plugins: 'paste image link autolink lists table media',
     menubar: false,
     toolbar: [
-      'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
-    ],
+      'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image  media',
+    ],images_upload_url : 'upload.php',
+		automatic_uploads : false,
+
+		images_upload_handler : function(blobInfo, success, failure) {
+			var xhr, formData;
+
+			xhr = new XMLHttpRequest();
+			xhr.withCredentials = false;
+			xhr.open('POST', 'upload.php');
+
+			xhr.onload = function() {
+				var json;
+
+				if (xhr.status != 200) {
+					failure('HTTP Error: ' + xhr.status);
+					return;
+				}
+
+				json = JSON.parse(xhr.responseText);
+
+				if (!json || typeof json.file_path != 'string') {
+					failure('Invalid JSON: ' + xhr.responseText);
+					return;
+				}
+
+				success(json.file_path);
+			};
+
+			formData = new FormData();
+			formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+			xhr.send(formData);
+		},
   });
+</script>
+<script>
   $('#fuMain').fileinput({
     theme: 'fa',
     showCaption: true,
-    dropZoneEnabled: true,
+    dropZoneEnabled: false,
     allowedFileExtensions: ['png', 'jpg', 'gif'],
     language: 'vi'
   });
 </script>
+<script  language="javascript">
+    unction validateSelectBox(obj)
+            {
+                // Lấy danh sách các options
+                var options = obj.children;
+ 
+                // Biến lưu trữ các chuyên mục đa chọn
+                var html = '';
+ 
+                // lặp qua từng option và kiểm tra thuộc tính selected
+                for (var i = 0; i < options.length; i++){
+                    if (options[i].selected){
+                        html += options[i].value;
+                    }
+                }
+ 
+                // Gán kết quả vào div#result
+                document.getElementById('txtcat').value = html;
+            }
+</script>
 {{/section}}
-
-<form method="post">
+<a href="./list">
+    <button class="btn btn-lg btn-success btn-block" style="padding: 10px 0px;" >
+        <i class="fa fa-backward" aria-hidden="true"></i>
+           QUAY VỀ DANH SÁCH BÀI VIẾT
+    </button>
+</a>
+<form method="post" id = "form" >
   <div class="card">
     <div class="card-header">
-      WYSIWYG HTML Editor
+      New Draft
     </div>
     <div class="card-body">
       <div class = "form-group">       
@@ -42,18 +105,22 @@
         <label for="txtContent">Content</label>
         <textarea name="content" id="txtContent" class="form-control" cols="30" rows="10"></textarea>
       </div>
-      <div class="form-group">
-        <div class="file-loading">
+      <div class = "form-group">
+        <label>Image</label>
+      <div class="file-loading">
           <input id="fuMain" name="fuMain" type="file" multiple>
-        </div>
+      </div>
       </div>
       <div class = "form-group">
         <label for="txtCategory">Category</label> 
-        <select name="category" id="txtCategory" class="form-control">
-          {{#each listCategory}}
-          <option value= "{{idmaincategory}}">{{idmaincategory}}. {{name}}</option>
-          {{/each}}
-        </select>
+        {{#each listCategory}}
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="category" id="exampleRadios{{idmaincategory}}" value="{{idmaincategory}}" form="form">
+          <label class="form-check-label" for="exampleRadios{{idmaincategory}}">
+            {{idmaincategory}}. {{name}}
+          </label>
+        </div>
+        {{/each}}
       </div>
       <div class = "form-group" >
         <label for="">Tag</label>
@@ -65,7 +132,7 @@
       </div>
     </div>
     <div class="card-footer">
-      <button type="submit" class="btn btn-lg btn-success btn-block">
+      <button type="submit" class="btn btn-lg btn-success btn-block" formaction='/admin/Writter/add'>
         <i class="fa fa-check" aria-hidden="true"></i>
         ĐĂNG BÀI
       </button>

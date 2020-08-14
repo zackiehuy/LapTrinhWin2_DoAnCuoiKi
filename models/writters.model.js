@@ -30,7 +30,7 @@ module.exports = {
         return db.add('tag',entity);
     },
     singletittle : function(tittle){
-        return db.load(`SELECT idnews FROM newspaper WHERE tittle = ${tittle}`);
+        return db.load(`SELECT idnews FROM newspaper WHERE tittle like '${tittle}'`);
     },
     patch: function (entity) {
         const condition = {
